@@ -16,7 +16,7 @@ The slides are over here: http://de.slideshare.net/jensarps/a-webgl-scene-in-30-
 
 ## Model
 
-The model by user "Tecno-Cronoz", taken from the 3D Warehouse:
+The model is made by user "Tecno-Cronoz", taken from the 3D Warehouse:
 http://sketchup.google.com/3dwarehouse/details?mid=bd51383e7b71c6246bed41d0253513f3
 
 ## decoupled-input
