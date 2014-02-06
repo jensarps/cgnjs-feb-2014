@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>WebGL</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: white;
+    }
+  </style>
+</head>
+<body>
+
+  <script src="r65/three.min.js"></script>
+
+  <script src="r65/ColladaLoader.js"></script>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.5/require.min.js"></script>
+
+  <script>
+    require(['lib/hipe', 'src/bindings-step2'], function (hipe, bindings) {
+
+      var camera, scene, renderer;
+
+      var SCREEN_HEIGHT = window.innerHeight;
+      var SCREEN_WIDTH = window.innerWidth;
+
+
+      init();
+      animate();
+
+      function init () {
+
+        var container = document.createElement('div');
+        document.body.appendChild(container);
+
+
+        /* Scene & Camera */
+
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(25, SCREEN_WIDTH / SCREEN_HEIGHT);
+        scene.add(camera);
+
+        camera.position.set(10, 0.7, 0);
+        camera.rotation.set(0,-0.5, 0);
+
+
+        /* Renderer */
+
+        renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+        renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+        container.appendChild(renderer.domElement);
+
+
+        /* Lights */
+
+        scene.add( new THREE.AmbientLight( 0xffffff ) );
+
+
+        /* Load Model */
+
+        loadModel();
+
+
+        /* Controls */
+
+        hipe.setBindings(bindings);
+
+      }
+
+      function loadModel () {
+
+        var loader = new THREE.ColladaLoader();
+        loader.options.convertUpAxis = true;
+        loader.load('bigsmoke3/bigsmoke2.dae', function (collada) {
+
+          var object = collada.scene;
+
+          object.scale.x = 0.01;
+          object.scale.y = 0.01;
+          object.scale.z = 0.01;
+
+          scene.add(object);
+        });
+
+      }
+
+      function animate () {
+
+        requestAnimationFrame(animate);
+
+        processInput();
+        render();
+      }
+
+      function processInput () {
+        var input = hipe.input;
+
+        if (input.forward) {
+          camera.translateZ(-0.05);
+        }
+        if (input.backward) {
+          camera.translateZ(0.05);
+        }
+
+        camera.translateX(( input.strafeRight - input.strafeLeft) / 50);
+
+        camera.rotation.y += input.turn / ( SCREEN_WIDTH / 20 );
+      }
+
+      function render () {
+
+        renderer.render(scene, camera);
+      }
+
+    });
+
+  </script>
+</body>
+</html>
