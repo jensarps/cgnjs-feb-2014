@@ -16,9 +16,28 @@
     .fs button {
       display: none;
     }
+    #pauseOverlay {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      display: none;
+      font-size: 60px;
+      font-family: monospace;
+      letter-spacing: 15px;
+      color: white;
+      text-align: center;
+      text-shadow: 0 0 10px black;
+      padding-top: 20%;
+    }
+    .paused #pauseOverlay {
+      display: block;
+    }
   </style>
 </head>
 <body>
+
+<div id="pauseOverlay">-paused-</div>
 
 <button onclick="document.documentElement.requestFullScreen();document.documentElement.requestPointerLock();">Fullscreen</button>
 
@@ -135,10 +154,18 @@
 
     function animate () {
 
-      isPaused || requestAnimationFrame(animate);
+      requestAnimationFrame(animate);
 
-      processInput();
-      render();
+      if (hipe.input.pause) {
+        isPaused = !isPaused;
+        hipe.input.pause = false;
+        document.documentElement.classList.toggle('paused');
+      }
+
+      if (!isPaused) {
+        processInput();
+        render();
+      }
     }
 
     function processInput () {

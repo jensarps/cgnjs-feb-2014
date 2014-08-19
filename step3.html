@@ -10,9 +10,28 @@
       overflow: hidden;
       background: white;
     }
+    #pauseOverlay {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      display: none;
+      font-size: 60px;
+      font-family: monospace;
+      letter-spacing: 15px;
+      color: white;
+      text-align: center;
+      text-shadow: 0 0 10px black;
+      padding-top: 20%;
+    }
+    .paused #pauseOverlay {
+      display: block;
+    }
   </style>
 </head>
 <body>
+
+<div id="pauseOverlay">-paused-</div>
 
 <script src="r65/three.min.js"></script>
 
@@ -28,6 +47,7 @@
     var SCREEN_HEIGHT = window.innerHeight;
     var SCREEN_WIDTH = window.innerWidth;
 
+    var isPaused = false;
 
     init();
     animate();
@@ -112,8 +132,16 @@
 
       requestAnimationFrame(animate);
 
-      processInput();
-      render();
+      if (hipe.input.pause) {
+        isPaused = !isPaused;
+        hipe.input.pause = false;
+        document.documentElement.classList.toggle('paused');
+      }
+
+      if (!isPaused) {
+        processInput();
+        render();
+      }
     }
 
     function processInput () {
