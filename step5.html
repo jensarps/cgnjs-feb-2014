@@ -212,7 +212,9 @@
       if (intersects.length) {
         var hit = intersects[0];
         var diff = 0.63 - hit.distance;
-        camera.position.y += diff;
+        if (diff < 1) {
+          camera.position.y += diff;
+        }
       }
 
       if (isFullscreen) {
