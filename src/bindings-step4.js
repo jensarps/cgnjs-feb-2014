@@ -36,19 +36,35 @@ define(function () {
       }
     ],
 
-    strafeLeft: {
-      device: KEYBOARD,
-      inputId: 'a',
-      down: true,
-      up: true
-    },
+    strafeLeft: [
+      {
+        device: GAMEPAD,
+        inputId: 'button-2',
+        down: true,
+        up: true
+      },
+      {
+        device: KEYBOARD,
+        inputId: 'a',
+        down: true,
+        up: true
+      }
+    ],
 
-    strafeRight: {
-      device: KEYBOARD,
-      inputId: 'd',
-      down: true,
-      up: true
-    },
+    strafeRight: [
+      {
+        device: GAMEPAD,
+        inputId: 'button-1',
+        down: true,
+        up: true
+      },
+      {
+        device: KEYBOARD,
+        inputId: 'd',
+        down: true,
+        up: true
+      }
+    ],
 
     turn: [
       {
@@ -57,7 +73,8 @@ define(function () {
       },
       {
         device: GAMEPAD,
-        inputId: 'axis-1'
+        inputId: 'axis-0',
+        invert: true
       }
     ],
 
