@@ -18,8 +18,3 @@ The slides are over here: http://de.slideshare.net/jensarps/a-webgl-scene-in-30-
 
 The model is made by user "Tecno-Cronoz", taken from the 3D Warehouse:
 http://sketchup.google.com/3dwarehouse/details?mid=bd51383e7b71c6246bed41d0253513f3
-
-## decoupled-input
-
-At the time of writing, the version I used in the examples is only available on
-the `dev`  branch: https://github.com/jensarps/decoupled-input/tree/dev
