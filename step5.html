@@ -48,7 +48,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.5/require.min.js"></script>
 
 <script>
-  require(['lib/hipe', 'src/bindings-step2', 'lib/game-shim.js'], function (hipe, bindings, _) {
+  require(['lib/dibox', 'src/bindings-step4', 'lib/game-shim.js'], function (DIBox, bindings, _) {
 
     var camera, scene, renderer;
 
@@ -108,7 +108,7 @@
 
       /* Controls */
 
-      hipe.setBindings(bindings);
+      DIBox.setBindings(bindings);
 
 
       window.addEventListener('resize', onWindowResize, false);
@@ -149,16 +149,16 @@
 
       document.documentElement.classList.toggle('fs');
 
-      hipe.configureDeviceHandler('mouse', 'infiniteXAxis', isFullscreen);
+      DIBox.configureDeviceHandler('mouse', 'infiniteXAxis', isFullscreen);
     }
 
     function animate () {
 
       requestAnimationFrame(animate);
 
-      if (hipe.input.pause) {
+      if (DIBox.input.pause) {
         isPaused = !isPaused;
-        hipe.input.pause = false;
+        DIBox.input.pause = false;
         document.documentElement.classList.toggle('paused');
       }
 
@@ -170,7 +170,7 @@
 
     function processInput () {
 
-      var input = hipe.input;
+      var input = DIBox.input;
       var distance;
 
 

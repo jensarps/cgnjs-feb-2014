@@ -40,7 +40,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.5/require.min.js"></script>
 
 <script>
-  require(['lib/hipe', 'src/bindings-step2'], function (hipe, bindings) {
+  require(['lib/dibox', 'src/bindings-step2'], function (DIBox, bindings) {
 
     var camera, scene, renderer;
 
@@ -94,7 +94,7 @@
 
       /* Controls */
 
-      hipe.setBindings(bindings);
+      DIBox.setBindings(bindings);
 
 
       window.addEventListener('resize', onWindowResize, false);
@@ -132,9 +132,9 @@
 
       requestAnimationFrame(animate);
 
-      if (hipe.input.pause) {
+      if (DIBox.input.pause) {
         isPaused = !isPaused;
-        hipe.input.pause = false;
+        DIBox.input.pause = false;
         document.documentElement.classList.toggle('paused');
       }
 
@@ -145,7 +145,7 @@
     }
 
     function processInput () {
-      var input = hipe.input;
+      var input = DIBox.input;
 
       if (input.forward) {
         camera.translateZ(-0.05);
